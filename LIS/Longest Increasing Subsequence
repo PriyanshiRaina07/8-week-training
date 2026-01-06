@@ -1,0 +1,39 @@
+import java.util.*;
+public class HelloWorld {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+          int n = sc.nextInt();     // size of array
+        int[] nums = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+
+        // Call helper function
+        System.out.println(helper(nums));
+    }
+
+    // 🔹 LIS helper function (O(n^2))
+    public static int helper(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+
+        int maxi = 1;
+
+        for (int curr = 1; curr < n; curr++) {
+            for (int last = 0; last < curr; last++) {
+                if (nums[last] < nums[curr] && dp[curr] < dp[last] + 1) {
+                    dp[curr] = dp[last] + 1;
+                    maxi = Math.max(maxi, dp[curr]);
+                }
+            }
+        }
+        return maxi;
+    }
+      
+}
+     
+
+
+
