@@ -1,0 +1,22 @@
+class Solution {
+    static int [][] dp;
+    static int matrixMultiplication(int arr[]) {
+        // code here
+        int n = arr.length;
+        dp = new int[n + 1][n + 1];
+       // return solve(1,n,arr);
+       for(int i = n-1; i>=1; i--){
+           for(int j= i+1; j <=n-1; j++){
+                int mini = Integer.MAX_VALUE;
+                //try all posibilities
+                for(int idx = i; idx < j; idx++){
+                    int cost = arr[i -1]*arr[idx]*arr[j] + 
+                    dp[i][idx]+dp[idx+1][j];
+                    mini = Math.min(mini,cost);
+                }
+                dp[i][j] = mini;
+            }
+        }
+        return dp[1][n-1];
+    }
+}
