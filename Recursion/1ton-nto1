@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class HelloWorld {
+    public static void main(String[] args){ 
+       Scanner sc = new Scanner(System.in);
+
+       
+        System.out.print("Enter n: ");
+        int n = sc.nextInt();
+
+        System.out.print("1 to N (Head Recursion): ");
+        print1ToN(n);
+
+        System.out.println();
+
+        System.out.print("N to 1 (Tail Recursion): ");
+        printNTo1(n);
+
+        sc.close();
+    }
+    public static void print1ToN(int n){   //head recursion
+        if(n == 0)
+            return;
+        print1ToN(n - 1);    //recursive call
+        System.out.println(n + " ");    
+    }
+    static void printNTo1(int n) {     //tail recursion
+        if (n == 0)
+            return;
+
+        System.out.print(n + " ");  // work first
+        printNTo1(n - 1);            // recursive call last
+    }
+}
+
+        
+    
+
+
+     
+
+
