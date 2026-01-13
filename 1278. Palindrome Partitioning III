@@ -1,0 +1,70 @@
+class Solution {
+    int n;
+    int MAX = (int)1e9;
+    public int palindromePartition(String s, int k) {
+        n = s.length();
+  
+        return solve(0,k,s);
+    }
+    public int solve(int i, int k, String s){
+        if (i == n && k == 0) return 0;
+        if (i == n || k == 0) return MAX;  //patition element khatm//element khatm pr partion hai
+
+        int min = MAX;
+
+        for (int j = i; j < n; j++) {
+            min = Math.min(min,checkPalindrome(i, j, s) + solve(j + 1, k - 1, s));
+        }       //k-1 becz one cut made next strt from j+1
+
+        return min;
+    }
+    public int checkPalindrome(int i, int j, String s) {
+        int count = 0;
+        while (i < j) {
+            if (s.charAt(i) != s.charAt(j))
+                count++;
+            i++;
+            j--;
+        }
+        return count;
+    }    
+
+
+
+
+//TABULATION
+class Solution {
+    int n;
+    int MAX = (int)1e9;
+    Integer[][] dp;
+    public int palindromePartition(String s, int k) {
+        n = s.length();
+        dp = new Integer[n][k+1];
+  
+        return solve(0,k,s);
+    }
+    public int solve(int i, int k, String s){
+        if (i == n && k == 0) return 0;
+        if (i == n || k == 0) return MAX;  //patition element khatm//element khatm pr partion hai
+        if(dp[i][k]!=null)
+           return dp[i][k];
+        int min = MAX;
+
+        for (int j = i; j < n; j++) {
+            min = Math.min(min,checkPalindrome(i, j, s) + solve(j + 1, k - 1, s));
+        }       //k-1 becz one cut made next strt from j+1
+
+        return dp[i][k] = min;
+    }
+    public int checkPalindrome(int i, int j, String s) {
+        int count = 0;
+        while (i < j) {
+            if (s.charAt(i) != s.charAt(j))
+                count++;
+            i++;
+            j--;
+        }
+        return count;
+    }    
+}
+}
