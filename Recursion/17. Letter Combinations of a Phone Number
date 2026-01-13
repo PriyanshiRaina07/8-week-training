@@ -1,0 +1,18 @@
+class Solution {
+    String [] map = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    public List<String> letterCombinations(String digits) {
+        List<String>ans = new ArrayList<>();
+        helper(digits,0,"",ans);                            //Each digit can map to at most 4 letters so 4ⁿ both time and space
+        return ans;
+       
+    }
+    public void helper(String digits,int index, String curr, List<String>ans) {
+        if (index == digits.length()){
+            ans.add(curr);
+            return;
+        }
+        for(char c:map[digits.charAt(index) -'0'].toCharArray()) {    //digit to number and number to string
+            helper(digits,index + 1,curr + c,ans);
+        }
+    }
+}
