@@ -23,3 +23,36 @@ class Solution {
 
     }
 }
+
+
+//MEMOIZATION
+
+
+class Solution {
+    Integer[] dp;
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        int n = arr.length;
+        dp = new Integer[n];
+          return solve(0,k,arr);
+    }
+
+    public int solve(int idx, int k, int[]arr) {
+        if (idx == arr.length)
+            return 0;
+        if(dp[idx]!=null)
+            return dp[idx];  
+        int len = 0;
+        int maxI = Integer.MIN_VALUE;
+        int maxArray = Integer.MIN_VALUE;  //total of all max
+
+        for(int i = idx; i <Math.min(arr.length,idx+k);i++){   //arrayindexbond
+            len++;
+            maxI = Math.max(arr[i],maxI);
+            int cost = maxI*len+solve(i+1,k,arr);
+            maxArray = Math.max(maxArray,cost);
+        }
+        return dp[idx] = maxArray;
+
+
+    }
+}
