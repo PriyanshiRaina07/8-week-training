@@ -1,6 +1,6 @@
 class Solution {
     public int findTheWinner(int n, int k) {
-        return helper(n, k) + 1; // 1 added because index is 0 bus it should return 1 
+        return helper(n, k) + 1; // 1 added because index is 0 bus it should return 1                   //O(n)
     }
 
     private int helper (int n, int k) {
