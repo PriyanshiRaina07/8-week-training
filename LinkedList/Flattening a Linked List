@@ -18,8 +18,8 @@ class Solution {
             return root;
         }
 
-        root.next = flatten(root.next);
-        root = MergeList (root,root.next);
+        root.next = flatten(root.next);     //  Recursively flatten the next list
+        root = MergeList (root,root.next);     //Merge current list with flattened next list
         return root;
     }
     public Node MergeList(Node a, Node b){
