@@ -1,0 +1,20 @@
+// User function Template for Java
+
+class Solution {
+    public List<String> AllPossibleStrings(String s) {
+        // Code here
+        ArrayList<String> ans = new ArrayList<>();
+        helper(0,s,"",ans);
+        Collections.sort(ans);
+        return ans;
+
+    }
+    public void helper(int idx, String s, String curr, ArrayList<String> ans){
+        if(idx == s.length()){
+            ans.add(curr);
+            return;
+        }
+        helper(idx+1,s,curr,ans);
+        helper(idx+1,s,curr+s.charAt(idx),ans);
+    }
+}
