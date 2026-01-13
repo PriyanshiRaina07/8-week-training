@@ -10,11 +10,11 @@ class Solution {
 
     }
     public void helper(int idx, String s, String curr, ArrayList<String> ans){
-        if(idx == s.length()){
+        if(idx == s.length()){           //agar index last tak gya to ans me add kar do current aur usko return kar do
             ans.add(curr);
             return;
         }
-        helper(idx+1,s,curr,ans);
-        helper(idx+1,s,curr+s.charAt(idx),ans);
+        helper(idx+1,s,curr,ans);                //exclude
+        helper(idx+1,s,curr+s.charAt(idx),ans);    //include 
     }
 }
