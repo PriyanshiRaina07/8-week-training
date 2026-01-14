@@ -1,0 +1,27 @@
+// User function Template for Java //tabulation
+class Solution {
+    public int maximumPath(int[][] mat) {
+        // code here
+        int m = mat.length;
+        int n = mat[0].length;
+        
+        int dp[][] = new int[m][n];
+        for(int i = 0; i < n; i++) {
+            dp[0][i] = mat[0][i];
+        }
+        for(int i = 1; i < m; i ++) {
+            for(int j = 0; j < n; j ++) {
+                int ld = (j - 1>=0)?dp[i - 1][j - 1]:0;
+                int rd = (j + 1<n)?dp[i - 1][j + 1]:0;
+                int up = dp[i - 1][j];
+                dp[i][j] = Math.max(ld,Math.max(rd,up))+mat[i][j];
+            }
+        }
+        int max = 0;
+        for(int j = 0; j <n; j++){
+            max = Math.max(max,dp[m-1][j]);
+        }
+        return max;
+        
+    }
+}
