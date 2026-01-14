@@ -1,0 +1,22 @@
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+        Arrays.sort(envelopes, (a,b) -> a[0] - b[0]);   //[width][height]
+        int n = envelopes.length;
+        int[] dp = new int[n];
+
+        int maxi = 1;   //width not equal and height i > height j
+        dp[0] = 1;
+
+        for(int i = 1; i < n; i++){
+            dp[i] = 1;    //every place initially 1
+            for(int j = 0; j < i; j++){
+                if(envelopes[i][0] != envelopes[j][0] && envelopes[i][1] > envelopes[j][1]){
+                    dp[i] = Math.max(dp[i],dp[j] + 1);      //+1 represent including current envelop
+                }
+
+            }
+            maxi = Math.max(maxi,dp[i]);
+        }
+        return maxi;
+    }
+}
