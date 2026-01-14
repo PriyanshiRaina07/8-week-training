@@ -1,0 +1,22 @@
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length == 1) return nums[0];    //One house left return that left house
+        int[]dp = new int [nums.length];
+        Arrays.fill(dp,-1);
+
+        int max_1 = helper(dp,nums,1,nums.length);     //Donot rob 1st house i.e strt from 1 index 
+        Arrays.fill(dp,-1);                           //2nd case need fresh start so again place -1
+
+        int max_2 = helper(dp,nums,0,nums.length - 1);      //start from 0 index(donot rob last house)
+        return Math.max(max_1,max_2);                             //max of both
+    }
+
+    public int helper(int[]dp,int[]nums,int idx,int length) {
+        if(idx >=length) return 0;                                  
+        if(dp[idx] != -1) return dp[idx];
+
+        int include = nums[idx] + helper(dp,nums,idx + 2,length);    //add value of present and skip next house
+        int exclude = helper(dp,nums,idx + 1,length);        //exclude the current house 
+        return dp[idx] = Math.max(include,exclude);           
+    }
+}
