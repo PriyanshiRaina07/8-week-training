@@ -1,0 +1,37 @@
+import java.util.*;
+public class HelloWorld {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-->0){
+         long a,b;
+         a = sc.nextLong();
+         b = sc.nextLong();
+         String l = String.valueOf(a-1);
+         String r = String.valueOf(b); 
+         Long[][][] dp1 = new  Long[20][2][4];
+         Long[][][] dp2 = new Long[20][2][4];
+         long ans = solve(r,0,1,0,dp1) - solve(l,0,1,0,dp2);
+         System.out.println(ans);
+        }                                                 
+
+    }
+    private static long solve(String s, int idx, int tight, int prev,Long dp[][][]){
+        if(prev >3) return 0;
+        if(idx == s.length())
+            return (prev > 0 ? 1 : 0);
+        int lb = 0;
+        int ub = (tight == 1)?s.charAt(idx)-'0':9;
+        long res = 0;
+        if( dp[idx][tight][prev] !=null) return  dp[idx][tight][prev];
+        for(int digit = lb; digit <= ub; digit++){
+            int newTight = (tight == 1 && digit == ub)?1:0;
+            int newPrev = prev;
+            if (digit != 0) newPrev++; 
+            res += solve(s,idx+1,newTight,newPrev,dp);
+        }
+        return dp[idx][tight][prev] = res;
+
+    }
+      
+}
